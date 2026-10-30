@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../../resources/views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-nu: #008c45;
+    --color-nu-dark: #006b34;
+    --color-nu-deep: #0d4b26;
+    --color-nu-soft: #e8f6ee;
+    --color-gold: #d97706;
+    --color-ink: #0f172a;
+    --color-navy: #102033;
+    --color-muted: #64748b;
+    --color-canvas: #f8fafc;
+    --color-line: #e2e8f0;
+}
+
+@layer components {
+    .btn-gold {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#b45309] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nu;
+    }
+
+    .btn-nu {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-nu px-5 py-3 text-sm font-semibold text-white transition hover:bg-nu-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+    }
+
+    .btn-line {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nu;
+    }
+}
+
+[id] {
+    scroll-margin-top: 6rem;
+}
+
+[data-amount][aria-pressed='true'] {
+    background-color: #d97706;
+    color: #fff;
+    border-color: #d97706;
+}

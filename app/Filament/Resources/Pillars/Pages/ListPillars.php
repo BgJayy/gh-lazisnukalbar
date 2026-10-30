@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Filament\Resources\Pillars\Pages;
+
+use App\Filament\Resources\Pillars\PillarResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
+
+class ListPillars extends ListRecords
+{
+    protected static string $resource = PillarResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            CreateAction::make(),
+        ];
+    }
+}
