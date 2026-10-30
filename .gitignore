@@ -8,8 +8,7 @@
 .phpactor.json
 .phpunit.result.cache
 /.codex
-/.cursor/*
-!/.cursor/mcp.json
+/.cursor
 /.idea
 /.nova
 /.phpunit.cache
@@ -42,3 +41,7 @@ Thumbs.db
 /stitch/
 /stitch_lazisnu_kalbar_donation_portal/
 /prd_ekosistem_digital_lazisnu_kalbar_markdown.md
+/AGENTS.md
+/CLAUDE.md
+/README.md
+.editorconfig
