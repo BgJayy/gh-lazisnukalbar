@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/robots.txt', function () {
     return response(implode("\n", [
         'User-agent: *',
-        'Disallow: /admin',
+        'Disallow: /panel-amil',
         'Disallow: /donasi/',
         '',
         'Sitemap: '.url('/sitemap.xml'),
@@ -54,3 +54,4 @@ Route::post('/donasi', [DonationController::class, 'store'])->middleware('thrott
 Route::post('/donasi/cek', [DonationController::class, 'lookup'])->middleware('throttle:donation-lookup')->name('donasi.lookup');
 Route::get('/donasi/{invoice}', [DonationController::class, 'show'])->where('invoice', '[A-Za-z0-9]+')->middleware('throttle:donation-show')->name('donasi.show');
 Route::post('/donasi/{invoice}/bukti', [DonationController::class, 'proof'])->where('invoice', '[A-Za-z0-9]+')->middleware('throttle:donation-proof')->name('donasi.proof');
+Route::get('/donasi/{invoice}/bukti', [DonationController::class, 'proofView'])->where('invoice', '[A-Za-z0-9]+')->middleware('throttle:donation-show')->name('donasi.proof.view');

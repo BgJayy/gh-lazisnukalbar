@@ -60,7 +60,7 @@
             <form method="post" action="{{ route('donasi.proof', $donation->invoice_number) }}" enctype="multipart/form-data" class="grid gap-3 rounded-3xl border border-line bg-white p-5">
                 @csrf
                 @if ($donation->proof_of_transfer)
-                    <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($donation->proof_of_transfer) }}" alt="Bukti transfer" class="h-32 w-32 rounded-xl border border-line object-cover">
+                    <img src="{{ route('donasi.proof.view', $donation->invoice_number) }}" alt="Bukti transfer" class="h-32 w-32 rounded-xl border border-line object-cover">
                     <p class="text-sm leading-6 text-muted">Bukti sudah tersimpan. Status tetap Menunggu sampai bendahara menyetujui.</p>
                 @else
                     <label class="grid gap-1 text-sm font-semibold">Unggah bukti transfer

@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('panel-amil')
             ->login()
             ->multiFactorAuthentication([
                 AppAuthentication::make()->recoverable(),

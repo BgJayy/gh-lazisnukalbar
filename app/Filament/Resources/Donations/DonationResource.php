@@ -65,7 +65,7 @@ class DonationResource extends Resource
                 TextInput::make('amount')->label('Nominal')->numeric()->prefix('Rp')->required()->minValue(1),
                 Select::make('payment_method')->label('Metode')->options(PaymentMethod::options())->default(PaymentMethod::ManualTransfer->value)->required()->native(false),
                 Select::make('payment_status')->label('Status')->options(PaymentStatus::options())->default(PaymentStatus::Pending->value)->required()->native(false),
-                FileUpload::make('proof_of_transfer')->label('Bukti transfer')->disk('public')->directory('donation-proofs')->image()->columnSpanFull(),
+                FileUpload::make('proof_of_transfer')->label('Bukti transfer')->disk('local')->directory('donation-proofs')->image()->columnSpanFull(),
                 Textarea::make('prayer_message')->label('Doa')->columnSpanFull(),
             ]);
     }

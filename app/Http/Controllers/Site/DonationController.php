@@ -12,9 +12,11 @@ use App\Models\Donation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DonationController extends Controller
 {
@@ -195,12 +197,26 @@ class DonationController extends Controller
             'proof.max' => 'Ukuran bukti transfer maksimal 2 MB.',
         ]);
 
-        $donation->proof_of_transfer = $request->file('proof')->store('donation-proofs', 'public');
+        $donation->proof_of_transfer = $request->file('proof')->store('donation-proofs', 'local');
         $donation->save();
 
         return redirect()
             ->route('donasi.show', $donation->invoice_number)
             ->with('status', 'Bukti transfer sudah diterima. Status tetap Menunggu sampai bendahara menyetujui.');
+    }
+
+    public function proofView(string $invoice): StreamedResponse
+    {
+        $donation = $this->findInvoice($invoice);
+
+        abort_unless(filled($donation->proof_of_transfer), 404);
+        abort_unless(Storage::disk('local')->exists($donation->proof_of_transfer), 404);
+
+        return Storage::disk('local')->response(
+            $donation->proof_of_transfer,
+            null,
+            ['Cache-Control' => 'private, no-store']
+        );
     }
 
     private function consumeFormToken(Request $request): void
