@@ -6,6 +6,7 @@ use App\Filament\Resources\Articles\Pages\CreateArticle;
 use App\Filament\Resources\Articles\Pages\EditArticle;
 use App\Filament\Resources\Articles\Pages\ListArticles;
 use App\Models\Article;
+use App\Support\ArticleBodyImage;
 use App\Support\ArticleCover;
 use BackedEnum;
 use Filament\Actions\EditAction;
@@ -67,7 +68,8 @@ class ArticleResource extends Resource
                     ->fileAttachmentsDirectory('articles/body')
                     ->fileAttachmentsVisibility('public')
                     ->fileAttachmentsAcceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->helperText('Gambar di dalam isi diunggah ke penyimpanan publik dan tampil di halaman berita. Format yang diterima: JPG, PNG, WebP.')
+                    ->saveUploadedFileAttachmentsUsing(fn ($file): ?string => ArticleBodyImage::store($file))
+                    ->helperText('Gambar di dalam isi otomatis diperkecil ke maksimal '.ArticleBodyImage::MAX_WIDTH.'px dan dikompresi. Format: JPG, PNG, WebP.')
                     ->columnSpanFull(),
             ]);
     }
