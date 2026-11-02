@@ -11,6 +11,7 @@ use BackedEnum;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -59,7 +60,15 @@ class ArticleResource extends Resource
                     ->helperText('Gambar yang lebih besar atau lebih kecil otomatis disesuaikan menjadi 1200 × 630 piksel.')
                     ->columnSpanFull(),
                 Textarea::make('excerpt')->label('Ringkasan')->rows(3)->columnSpanFull(),
-                Textarea::make('body')->label('Isi')->required()->rows(12)->columnSpanFull(),
+                RichEditor::make('body')
+                    ->label('Isi')
+                    ->required()
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('articles/body')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsAcceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->helperText('Gambar di dalam isi diunggah ke penyimpanan publik dan tampil di halaman berita. Format yang diterima: JPG, PNG, WebP.')
+                    ->columnSpanFull(),
             ]);
     }
 
